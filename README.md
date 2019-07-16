@@ -21,6 +21,8 @@ The folders checkpoints, cp, cppo contain keras models for differnt models
 ### Non mentioned
 all non mentioned files were test files and are of no importance.
 ## NB
+Runing any learning will overwrite the old model, if you have a model that you would like to keep, move it before launching the next learning.
+to use the models you must modify the code, all actors and critics have .load_weights() and .save_weights(). these methods can take a path argument.
 To have accurate results, the policy test files must be modified to import the correct algoritm implementation.(e.g. if atlas2.py was run, then result.py should import ppo and not actor_critic)
 to run these programs, you must have the following:
 + gym
