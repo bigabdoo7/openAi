@@ -3,13 +3,11 @@
 #from x imprt sigma
 import tensorflow as tf
 from tensorflow import keras
-from scipy.stats import multivariate_normal
-from numpy import clip, array
 import tensorflow_probability as tfp
 
 if not ('sigma'in locals() or 'sigma'in globals()):
-	sigma = tf.eye(30)*0.1
-sigma = 0.3
+	sigma = 0.3
+
 # We suppose that our action destribution follows a multivariate normal law, N(mu, sigma), we consider that siqma is constant and thus ont approximate mu(theta).
 #the variable sigma that is used by default is defined below, we check taht no other sigma was specified, if so, the alternative sigma is used.
 class actor:
@@ -78,31 +76,3 @@ class critic:
 	def load_weights(self, path="./cppo/critic"):
 		self.model.load_weights(path)
 		print("critic weights loaded")
-
-#if __name__ == "__main__":
-#	c = critic()
-#	a = actor(0.2)
-#	c.load_weights()
-#	a.load_weights()
-#	x= [.2]*70
-#	y= [-.8]*30
-#	y2 = [0.5]*30
-#	try:
-		#while True:
-#		c.fit(x,[2])
-#		c.fit(x,[2])
-#		c.fit(x,[2])
-#		c.fit(x,[2])
-#		c.fit(x,[2])
-#		c.fit(x,[2])
-#		print(c.predict(x))
-#		print("\n\n\n")
-#		a.fit(x,y)
-#		a.predict(x)
-#		print("\n\n\n")
-#	except KeyboardInterrupt:
-#		c.fit(x, [5])
-#		print("\n\n", a.predict(x),"\n\n")
-#		print("\n\n", c.predict(x),"\n\n")
-#		c.save_weights()
-#		a.save_weights()

@@ -3,13 +3,12 @@
 #from x imprt sigma
 import tensorflow as tf
 from tensorflow import keras
-sigma = tf.eye(1)*0.3
+
 # We suppose that our action destribution follows a multivariate normal law, N(mu, sigma), we consider that siqma is constant and thus ont approximate mu(theta).
 #the variable sigma that is used by default is defined below, we check taht no other sigma was specified, if so, the alternative sigma is used.
 if not ('sigma'in locals() or 'sigma'in globals()):
-	sigma = tf.eye(30)*0.1
-if not ('s_1'in locals() or 's_1'in globals()):
-		s_1 = tf.linalg.inv(sigma)
+	sigma = tf.eye(1)*0.3
+s_1 = tf.linalg.inv(sigma)
  #tf.transpose(mean)* (s_1 * tf.subtract(action, mean))
 class actor:
 	def __init__(self):
@@ -61,20 +60,3 @@ class critic:
 	def load_weights(self, path="./cp/critic"):
 		self.model.load_weights(path)
 		print("critic weights loaded")
-
-#if __name__ == "__main__":
-#	c = critic()
-#	a = actor()
-#	c.load_weights()
-#	a.load_weights()
-#	x= [.2]*70
-#	y= [-.8]*30
-#	try:
-#		while True:
-#			a.fit(x,y)
-#	except KeyboardInterrupt:
-#		c.fit(x, [5])
-#		print("\n\n", a.predict(x),"\n\n")
-#		print("\n\n", c.predict(x),"\n\n")
-#		c.save_weights()
-#		a.save_weights()

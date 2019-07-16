@@ -18,3 +18,4 @@ for i in range(20):
 		obs, _, done,_ = env.step((action[0][0]>0.5)*1)
 	time.sleep(1)
 	print("episode {} : {} steps".format(i+1, steps))
+env.close()

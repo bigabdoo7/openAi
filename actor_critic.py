@@ -62,20 +62,3 @@ class critic:
 	def load_weights(self, path="./checkpoints/critic"):
 		self.model.load_weights(path)
 		print("critic weights loaded")
-
-#if __name__ == "__main__":
-#	c = critic()
-#	a = actor()
-#	c.load_weights()
-#	a.load_weights()
-#	x= [.2]*70
-#	y= [-.8]*30
-#	try:
-#		while True:
-#			a.fit(x,y)
-#	except KeyboardInterrupt:
-#		c.fit(x, [5])
-#		print("\n\n", a.predict(x),"\n\n")
-#		print("\n\n", c.predict(x),"\n\n")
-#		c.save_weights()
-#		a.save_weights()

@@ -24,7 +24,7 @@ try:
 			env.render()
 			tau.append(obs)
 			action = act.predict(obs)
-			action = action# + random.normal(0.0, 0.3)
+			action = action + random.normal(0.0, 0.3)
 			tau.append(action)
 			action = (action[0][0]>0.5)*1
 			obs, reward, done, _ = env.step(action)
