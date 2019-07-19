@@ -38,6 +38,7 @@ try:
 				y = tau[2]
 				adv = y - cri.predict(tau[0])
 				cri.fit(tau[0], [y])
+				cri.fit(tau[3], [0])
 				act.fit(tau[0], tau[1], adv)
 				tau=[]
 				break
