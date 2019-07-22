@@ -9,7 +9,7 @@ act.load_weights()
 cri.load_weights()
 tau=[]
 average=0
-for i in range(20):
+for i in range(100):
 	obs=env.reset()
 	steps = 0
 	done = False
@@ -24,5 +24,5 @@ for i in range(20):
 		rew += r
 	#print(tau) 
 	print("episode {} : {} steps, and reward {}".format(i+1, steps, rew))
-print("average reward for 100 episode is {}".format(averge))
+print("average reward for 100 episode is {}".format(average))
 env.close()
