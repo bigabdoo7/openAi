@@ -8,17 +8,21 @@ cri = ac.critic()
 act.load_weights()
 cri.load_weights()
 tau=[]
+average=0
 for i in range(20):
 	obs=env.reset()
 	steps = 0
 	done = False
+	if i!=0:
+		average= (average*(i-1)+rew)/i
+	rew=0
 	while not done:
 		steps += 1
 		env.render()
 		action = act.predict(obs)# +  random.normal(0.0, 0.3)
-		obs, _, done,_ = env.step((action[0][0]>0.5)*1)
-		tau.append([obs, act.predict(obs), cri.predict(obs)])
-	time.sleep(1)
+		obs, r, done,_ = env.step((action[0][0]>0.5)*1)
+		rew += r
 	#print(tau) 
-	print("episode {} : {} steps".format(i+1, steps))
+	print("episode {} : {} steps, and reward {}".format(i+1, steps, rew))
+print("average reward for 100 episode is {}".format(averge))
 env.close()
