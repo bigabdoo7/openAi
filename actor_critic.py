@@ -4,10 +4,10 @@
 import tensorflow as tf
 from tensorflow import keras
 import math as m
-# We suppose that our action destribution follows a multivariate normal law, N(mu, sigma), we consider that siqma is constant and thus ont approximate mu(theta).
+# We suppose that our action destribution follows a multivariate normal law, N(mu, sigma), we consider that siqma is constant and thus only approximate mu(theta).
 #the variable sigma that is used by default is defined below, we check taht no other sigma was specified, if so, the alternative sigma is used.
 if not ('sigma'in locals() or 'sigma'in globals()):
-	sigma = tf.eye(30)*0.5
+	sigma = tf.eye(30)*0.15
 if not ('s_1'in locals() or 's_1'in globals()):
 	s_1 = tf.linalg.inv(sigma)
 pi= tf.constant(m.pi)
@@ -19,7 +19,7 @@ class actor:
 		self.model.add(keras.layers.Dense(256, activation="relu"))
 		self.model.add(keras.layers.Dense(128, activation="relu"))
 		self.model.add(keras.layers.Dense(30, activation="tanh"))
-		sgd= tf.keras.optimizers.SGD(learning_rate=0.00001)
+		sgd= tf.keras.optimizers.SGD(learning_rate=1e-7)
 		self.model.compile(optimizer=sgd, loss=self.Loss)
 	def Loss(self, action, mean):
 		mean = tf.reshape(tf.convert_to_tensor(mean), [1, 30])
@@ -47,9 +47,8 @@ class critic:
 		keras.layers.Dense(64, activation="relu"),
 		keras.layers.Dense(1, activation="linear")
 		])
-		self.model.compile(optimizer=keras.optimizers.Adam(learning_rate=0.001), loss= "mean_squared_error")
+		self.model.compile(loss= "mean_squared_error", optimizer=keras.optimizers.Adam(learning_rate=1e-5))
 	def fit(self, x, y):
-		#y is ; r_i + gamma * v(s_{i+1})
 		x = tf.reshape(tf.convert_to_tensor(x), [1,70])
 		y = tf.convert_to_tensor(y)
 		self.model.fit(x, y, epochs=3, verbose=0)

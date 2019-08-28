@@ -8,8 +8,8 @@ from numpy import random
 env = gym.make('RoboschoolAtlasForwardWalk-v1')
 act = ac.actor()
 cri = ac.critic()
-act.load_weights()
-cri.load_weights()
+act.load_weights("./checkpoints_explore/actor")
+cri.load_weights("./checkpoints_explore/critic")
 gamma = 0.95
 tau = []
 ep=0
@@ -25,8 +25,8 @@ try:
 		if not ep_count % 100 :
 			print("average episode length = {}, and reward {}".format(savg, savg_rew))
 			sec=0
-			act.save_weights()
-			cri.save_weights()
+			act.save_weights("./checkpoints_explore/actor")
+			cri.save_weights("./checkpoints_explore/critic")
 		if sec != 0:
 			savg = ((sec-1)*savg + ep)/sec
 			savg_rew = ((sec-1)*savg_rew + rew)/sec
@@ -42,7 +42,7 @@ try:
 			ep+=1
 			tau.append(obs)
 			action = act.predict(obs)
-			action = action + random.normal(0.0, 0.5, 30)
+			action = action + random.normal(0.0, 0.05, 30)
 			action = action[0]
 			tau.append(action)
 			obs, reward, done, _ = env.step(action)
@@ -65,6 +65,6 @@ try:
 				break
 except KeyboardInterrupt:
 	print("\nran {} episodes with average length of {}, and average reward {}".format(ep_count, avg, avg_rew))
-	act.save_weights()
-	cri.save_weights()
+	act.save_weights("./checkpoints_explore/actor")
+	cri.save_weights("./checkpoints_explore/critic")
 	print("weights saved")

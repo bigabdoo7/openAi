@@ -14,7 +14,7 @@ for i in range(100):
 	steps = 0
 	done = False
 	if i!=0:
-		average= (average*(i-1)+rew)/i
+		average= average + (rew-average)/i
 	rew=0
 	while not done:
 		steps += 1
@@ -22,7 +22,6 @@ for i in range(100):
 		action = act.predict(obs)# +  random.normal(0.0, 0.3)
 		obs, r, done,_ = env.step((action[0][0]>0.5)*1)
 		rew += r
-	#print(tau) 
 	print("episode {} : {} steps, and reward {}".format(i+1, steps, rew))
 print("average reward for 100 episode is {}".format(average))
 env.close()
