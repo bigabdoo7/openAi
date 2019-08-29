@@ -1,4 +1,11 @@
+[Autor: Abderrahman Qohafa]
+[Mail: abderrahman.qohafa@mines-ales.org]
 # OpenAI RL algorithms implementation
+## Requirements
+To run these programs, you must have the following packages:
++ gym 0.12.1
++ roboschool  1.0.48 (for atlas)
++ tensorflow2.0-beta
 ## File and folders names & contents
 ### Algorithms implementations
 + actor_critic.py: actor critic implementation for roboschool's Atlas humanoid
@@ -19,8 +26,3 @@ all non mentioned files were test files and are of no importance.
 Runing any learning will overwrite the old model, if you have a model that you would like to keep, move it before launching the next learning.
 
 To use the models you must modify the code, all actors and critics have .load_weights() and .save_weights(). these methods can take a path argument.
-
-To run these programs, you must have the following packages:
-+ gym
-+ roboschool(for atlas)
-+ tensorflow2.0-beta
