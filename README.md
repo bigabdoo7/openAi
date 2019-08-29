@@ -1,5 +1,5 @@
-[Autor: Abderrahman Qohafa]
-[Mail: abderrahman.qohafa@mines-ales.org]
+[comment]: # (Autor: Abderrahman Qohafa)
+[comment]: # (Mail: abderrahman.qohafa@mines-ales.org)
 # OpenAI RL algorithms implementation
 ## Requirements
 To run these programs, you must have the following packages:
